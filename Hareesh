@@ -35,6 +35,6 @@ kubectl delete pod worker-dd46d7584-h5ls6
 kubectl delete pod db-b54cd94f4-48826
 kubectl logs worker-dd46d7584-77slg
 
-Obseravtion : Worker is not part of kubectl get svc
+Obseravtion : Worker service is not part of kubectl get svc
 
 ====================================================================
