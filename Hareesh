@@ -1,0 +1,40 @@
+====================================================================
+
+"Delete them in same order 
+
+1st : VOTE pod : Observe what happens both in frontEnd & in Unix
+Processed by container ID vote-94849dc97-shcxj
+changed to 
+Processed by container ID vote-94849dc97-gn526
+
+2nd : WORKER pod  : Observe what happens both in frontEnd & in Unix
+No changes observed frontEnd & in Unix WORKER_POD, previous logs will get deleted
+
+3rd : DB pod : Observe what happens both in frontEnd & in Unix"
+When DB pod is deleted, WORKER/RESULT pod gets restarted. As DB pod contains Voting data RESULT pod need to restart to display fresh page without vote.
+Vote data got flushed and in GUI "No votes yet" is shown with CATS/DOGS getting reset to 50/50 percentage
+
+WORKER POD Logs snapshot 
+[root@ip-172-31-19-194 ~]# kubectl logs worker-dd46d7584-77slg
+Connected to db
+Found redis at 10.110.182.67
+Connecting to redis
+Processing vote for 'a' by '936d2554db28447'
+
+Commands used
+
+kubectl delete all --all;
+yum install git -y
+git clone  https://github.com/ashishrpandey/example-voting-app
+kubectl apply -f .
+kubectl get pods -o wide
+kubectl get pods
+kubectl get svc
+kubectl delete vote-94849dc97-shcxj
+kubectl delete pod worker-dd46d7584-h5ls6
+kubectl delete pod db-b54cd94f4-48826
+kubectl logs worker-dd46d7584-77slg
+
+Obseravtion : Worker is not part of kubectl get svc
+
+====================================================================
